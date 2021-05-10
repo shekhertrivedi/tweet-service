@@ -1,10 +1,12 @@
 package main
 
-import(
-	"fmt"
+import (
+	"log"
+
+	"github.com/shekhertrivedi/tweet-service/transport"
 )
 
 func main() {
-	fmt.Println("init")
+	log.Println("Initializing tweet service app..!!!")
+	transport.InitApp()
 }
-
