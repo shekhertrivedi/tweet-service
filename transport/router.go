@@ -6,8 +6,10 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
+	//"github.com/joho/godotenv"
 	"github.com/shekhertrivedi/tweet-service/model"
 	"github.com/shekhertrivedi/tweet-service/service"
 )
@@ -19,6 +21,13 @@ var (
 // InitApp initialize service and router
 func InitApp() {
 
+	//os.Setenv("PORT", "8412")
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatalf("Error occured while reading port..!!")
+	}
+
 	tweetService = service.InitTweetService()
 
 	router := mux.NewRouter()
@@ -28,9 +37,16 @@ func InitApp() {
 	router.HandleFunc("/v0/tweets/{id}", GetTweet).Methods("GET")
 	router.HandleFunc("/v0/tweets", GetAllTweets).Methods("GET")
 
-	log.Println("Server is listening on port 8412...!!!")
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Println(fmt.Sprintf("Error occured while loading env file %v", err))
+	// }
 
-	http.ListenAndServe(":8412", router)
+	log.Printf("Server is listening on %v ", port)
+
+	if err := http.ListenAndServe(":"+port, router); err != nil {
+		log.Panicf("Failed to start the application %v", err)
+	}
 
 }
 
