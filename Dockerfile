@@ -1,5 +1,5 @@
 # base image
 FROM alpine
-COPY ./build/. .
+COPY tweet-service .
 EXPOSE 8412
 ENTRYPOINT [ "./tweet-service" ]
