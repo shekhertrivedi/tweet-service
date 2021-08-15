@@ -21,7 +21,7 @@ var (
 // InitApp initialize service and router
 func InitApp() {
 
-	//os.Setenv("PORT", "8412")
+	os.Setenv("PORT", "8412")
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -67,7 +67,7 @@ func CreateTweet(w http.ResponseWriter, r *http.Request) {
 		w.Write(getErrorResponse(http.StatusInternalServerError, err.Error()))
 		return
 	}
-	res, _ := json.Marshal(tweet)
+	res, _ := json.MarshalIndent(tweet, "", "")
 	w.WriteHeader(http.StatusCreated)
 	w.Write(res)
 }
@@ -118,7 +118,7 @@ func GetTweet(w http.ResponseWriter, r *http.Request) {
 		w.Write(getErrorResponse(http.StatusInternalServerError, err.Error()))
 		return
 	}
-	b, _ := json.Marshal(tweet)
+	b, _ := json.MarshalIndent(tweet, "", "")
 	w.WriteHeader(http.StatusOK)
 	w.Write(b)
 }
@@ -132,7 +132,7 @@ func GetAllTweets(w http.ResponseWriter, r *http.Request) {
 		w.Write(getErrorResponse(http.StatusInternalServerError, err.Error()))
 		return
 	}
-	b, _ := json.Marshal(tweets)
+	b, _ := json.MarshalIndent(tweets, "", "")
 	w.WriteHeader(http.StatusOK)
 	w.Write(b)
 }
@@ -142,6 +142,6 @@ func getErrorResponse(status int, message string) []byte {
 		Code:    status,
 		Message: message,
 	}
-	b, _ := json.Marshal(res)
+	b, _ := json.MarshalIndent(res, "", "")
 	return b
 }
