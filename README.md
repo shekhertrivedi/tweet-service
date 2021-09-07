@@ -4,7 +4,7 @@ Upon changes into the application, build the binary using build.sh
 
 Build the docker image
 
-    docker build ccshekhar/tweet-service:latest .
+    docker build -t ccshekhar/tweet-service:latest .
 
 Push the image to the docker hub
 

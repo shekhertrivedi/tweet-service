@@ -52,6 +52,7 @@ func InitApp() {
 
 // CreateTweet create tweet
 func CreateTweet(w http.ResponseWriter, r *http.Request) {
+	log.Printf("create tweet..!!")
 	b, err := ioutil.ReadAll(r.Body)
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
@@ -74,6 +75,7 @@ func CreateTweet(w http.ResponseWriter, r *http.Request) {
 
 // UpdateTweet update tweet
 func UpdateTweet(w http.ResponseWriter, r *http.Request) {
+	log.Printf("update tweet..!!")
 	m := mux.Vars(r)
 	b, err := ioutil.ReadAll(r.Body)
 	w.Header().Set("Content-Type", "application/json")
@@ -96,6 +98,7 @@ func UpdateTweet(w http.ResponseWriter, r *http.Request) {
 
 // DeleteTweet delete tweet
 func DeleteTweet(w http.ResponseWriter, r *http.Request) {
+	log.Printf("delete tweet..!!")
 	m := mux.Vars(r)
 	w.Header().Set("Content-Type", "application/json")
 	err := tweetService.DeleteTweet(context.Background(), m["id"])
@@ -110,6 +113,7 @@ func DeleteTweet(w http.ResponseWriter, r *http.Request) {
 
 // GetTweet get tweet
 func GetTweet(w http.ResponseWriter, r *http.Request) {
+	log.Printf("get tweet..!!")
 	m := mux.Vars(r)
 	w.Header().Set("Content-Type", "application/json")
 	tweet, err := tweetService.GetTweet(context.Background(), m["id"])
