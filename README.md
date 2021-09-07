@@ -12,6 +12,27 @@ Push the image to the docker hub
 
 User docker run to successively execute the service (exposed on port 8412)
 
+    docker run -p 8412:8412 ccshekhar/tweet-service:latest
+
+
+# Using gitlab container registry
+
+login to gitlab container registry
+
+    docker login registry.gitlab.com
+
+pull the image from dockerhub
+
+    docker pull ccshekhar/tweet-service:latest
+
+tag the image with gitlab reference
+
+    docker tag ccshekhar/tweet-service:latest registry.gitlab.com/trial-cc1/codpeipes-ci
+
+push the image to gitlab container registry
+
+    docker push registry.gitlab.com/trial-cc1/codpeipes-ci
+
 
 service provides crud operations for tweets
 
