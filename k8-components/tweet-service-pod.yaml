@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "tweet-service"
+  namespace: default
+  labels:
+    name: "tweet-service"
+    app: "tweet-service"
+spec:
+  containers:
+  - name: tweet-service
+    image: "ccshekhar/tweet-service:latest"
+    ports:
+    - containerPort:  8412
