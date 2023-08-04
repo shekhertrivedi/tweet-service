@@ -2,3 +2,7 @@
 
 # ignore the binary generated
 tweet-service
+
+coverage.txt
+
+bin

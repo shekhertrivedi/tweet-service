@@ -10,8 +10,5 @@ spec:
   containers:
   - name: tweet-service
     image: "ccshekhar/tweet-service:latest"
-    imagePullPolicy: Always
     ports:
     - containerPort:  8412
-  imagePullSecrets:
-    - name: mysecret
