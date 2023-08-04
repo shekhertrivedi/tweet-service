@@ -7,6 +7,8 @@ import (
 	"github.com/shekhertrivedi/tweet-service/model"
 )
 
+//go:generate mockery --all
+
 // TweetRepo repository
 type TweetRepo interface {
 	Create(context.Context, *model.Tweet) (*model.Tweet, error)
