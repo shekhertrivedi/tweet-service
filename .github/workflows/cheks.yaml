@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
-          path: bin
+          path: coverage
   sonarcloud:
     name: SonarCloud
     needs: run
@@ -32,7 +32,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: code-coverage-report
-          path: bin
+          path: coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

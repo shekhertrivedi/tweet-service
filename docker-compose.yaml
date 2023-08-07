@@ -1,0 +1,34 @@
+version: '3'
+
+networks:
+  tweet-service:
+    driver: bridge
+
+
+secrets:
+  netrc:
+    file: $HOME/.netrc
+
+services:
+  
+  tweet-service:
+    image: ccshekhar/tweet-service
+    container_name: tweet-service
+    networks: [tweet-service]
+    build:
+      context: .
+      target: api-runner
+      cache_from:
+        - "ccshekhar/tweet-service:latest"
+    ports:
+      - ${TR_SERVER_HTTP_PORT:-8412}:8412
+
+  service-unit-test:
+    image: ccshekhar/tweet-service-unit-test
+    container_name: tweet-service-unit-test
+    networks: [tweet-service]
+    volumes:
+      - ./coverage:/usr/src/app
+    build:
+      context: .
+      target: unit-test
