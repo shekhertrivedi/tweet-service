@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	log.Println("Initializing tweet service app..!!!")
+	log.Println("Initializing tweet service..!!!")
 	transport.InitApp()
 }
