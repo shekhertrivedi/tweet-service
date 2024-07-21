@@ -9,6 +9,8 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
+
 	//"github.com/joho/godotenv"
 	"github.com/shekhertrivedi/tweet-service/model"
 	"github.com/shekhertrivedi/tweet-service/service"
@@ -37,6 +39,14 @@ func InitApp() {
 	router.HandleFunc("/v0/tweets/{id}", GetTweet).Methods("GET")
 	router.HandleFunc("/v0/tweets", GetAllTweets).Methods("GET")
 
+	// Apply CORS middleware
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPut, http.MethodPatch},
+		AllowedHeaders: []string{"*"},
+	})
+	routerCORS := c.Handler(router)
+
 	// err := godotenv.Load()
 	// if err != nil {
 	// 	log.Println(fmt.Sprintf("Error occured while loading env file %v", err))
@@ -44,7 +54,7 @@ func InitApp() {
 
 	log.Printf("Server is listening on %v ", port)
 
-	if err := http.ListenAndServe(":"+port, router); err != nil {
+	if err := http.ListenAndServe(":"+port, routerCORS); err != nil {
 		log.Panicf("Failed to start the application %v", err)
 	}
 
